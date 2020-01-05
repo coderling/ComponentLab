@@ -32,10 +32,11 @@ float caculate_wave(float2 pos, float amplitude, float2 dir, float length, float
     //频率，角速度
     float freq = TWO_PI / length;
     //相位
-    float speed = (length / TWO_PI * Gravity);
+    float speed = 1 / sqrt(length / TWO_PI * Gravity);
+
     float phase = speed * time;
     phase = fmod(phase, TWO_PI);
-    return amplitude * sin(dot(dir, pos) * freq + phase);
+    return 2 * amplitude *  pow(sin(dot(dir, pos) * freq + phase) / 2 + 0.5, 2.5);
 }
 
 inline float2 GetWaveDir(int index, float2 pos)
